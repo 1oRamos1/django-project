@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Profile{% endblock title %}
+
+{% block body %}
+<div class="max-w-lg mx-auto mt-10 p-6 bg-white shadow-md rounded">
+    <h2 class="text-2xl font-bold text-center mb-6">Edit Your Profile</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- First Name -->
+        <div class="mb-4">
+            <label for="first_name" class="block text-sm font-medium text-gray-700">First Name</label>
+            <input
+                type="text"
+                id="first_name"
+                name="first_name"
+                value="{{ user.first_name }}"
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required>
+        </div>
+
+        <!-- Last Name -->
+        <div class="mb-4">
+            <label for="last_name" class="block text-sm font-medium text-gray-700">Last Name</label>
+            <input
+                type="text"
+                id="last_name"
+                name="last_name"
+                value="{{ user.last_name }}"
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required>
+        </div>
+
+        <!-- Username -->
+        <div class="mb-4">
+            <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+            <input
+                type="text"
+                id="username"
+                name="username"
+                value="{{ user.username }}"
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-4">
+            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            <small class="text-gray-500">Leave blank if you don't want to change the password</small>
+        </div>
+
+        <!-- Profile Image -->
+        <div class="mb-4">
+            <label for="image" class="block text-sm font-medium text-gray-700">Profile Image</label>
+            <input
+                type="file"
+                id="image"
+                name="image"
+                accept="image/*"
+                class="mt-1 block w-full text-sm text-gray-500
+                       file:mr-4 file:py-2 file:px-4
+                       file:rounded file:border-0
+                       file:text-sm file:font-semibold
+                       file:bg-blue-50 file:text-blue-700
+                       hover:file:bg-blue-100">
+            {% if user.profile.image %}
+                <img src="{{ user.profile.image.url }}" alt="Current Profile Image" class="mt-4 w-24 h-24 rounded-full">
+            {% endif %}
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-end">
+            <button type="submit"
+                class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600">
+                Save Changes
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock body %}

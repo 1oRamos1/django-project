@@ -1,0 +1,17 @@
+
+<!-- this file named feed/templates/feed because django looks for every
+ "templates" file of each installed apps in "til" settings.py file,
+  to not get confused, we use "templates/feed"
+  so it will choose the feed "templates and not others app templates -->
+
+{% extends "base.html" %}
+{% block title %}Changed the title of the homepage{% endblock %}
+
+{% block body %}
+    <div id="posts-container">
+        {% for post in posts %}
+            {% include "includes/post.html" with post=post show_detail_link=True %}
+        {% endfor %}
+    </div>
+{% endblock %}
+
